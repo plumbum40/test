@@ -11,7 +11,9 @@ import javax.swing.Timer;
 
 public class Start extends JPanel implements ActionListener{
 
-	public static int blockSize = 32,w = 30,h = 20;
+	public static int blockSize = 32;
+	public static int w = 30;//width
+	public static int h = 20;//height
 	
 	Timer t = new Timer(1000/10, this);
 	
@@ -32,7 +34,7 @@ public class Start extends JPanel implements ActionListener{
 		
 		frame.add(Background.background());
 		
-		frame.add(Panel.panel());
+		frame.add(SidePanel.sidePanel());
 		
 		frame.add(new Start());
 	}
