@@ -18,6 +18,7 @@ public class Background {
 	}
 	
 	public static void draw(Graphics g) {
+		System.out.println("test 1");
 		for(int i = 0;i<Start.h+1;i++){
 			g.setColor(linesColor);
 			g.drawLine(0, i*Start.blockSize, Start.w*Start.blockSize, i*Start.blockSize);
@@ -26,6 +27,7 @@ public class Background {
 			g.setColor(linesColor);
 			g.drawLine(i*Start.blockSize, 0, i*Start.blockSize, Start.h*Start.blockSize);
 		}
+		System.out.println("test 2");
 	}
 
 }

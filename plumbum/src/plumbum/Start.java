@@ -3,25 +3,29 @@ package plumbum;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Start extends JPanel implements ActionListener{
+public class Start extends JPanel implements Runnable{
 
 	public static int blockSize = 32;
-	public static int w = 30;//width
-	public static int h = 20;//height
+	public static int w = 30;//width in block
+	public static int h = 20;//height in block
+		
+	private BufferedImage img;
+	private static Graphics gr;
 	
-	Timer t = new Timer(1000/10, this);
+	private Thread thread1 = new Thread(this);
 	
 	public Start(){
-		t.start();
+		thread1.start();
 	}
-	public void paint(Graphics g){
-		Background.draw(g);
+	public void updatePaint(){
+		Background.draw(gr);
 	}
 	
 	public static void main(String[] args) {
@@ -31,7 +35,7 @@ public class Start extends JPanel implements ActionListener{
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		
+		gr = frame.getGraphics();
 		frame.add(Background.background());
 		
 		frame.add(SidePanel.sidePanel());
@@ -39,8 +43,18 @@ public class Start extends JPanel implements ActionListener{
 		frame.add(new Start());
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		repaint();
+	public void run() {
+		int c = 0;
+		while(true){
+			
+			updatePaint();
+			System.out.println(c);
+			try {
+				thread1.sleep(100);
+			} catch (InterruptedException e) {e.printStackTrace();}
+			c++;
+		}
+		
 	}
 
 }
